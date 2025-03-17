@@ -21,7 +21,7 @@ A performance testing project for [BlazeDemo.com](https://www.blazedemo.com/) us
    - Loop Count: 1
    - Duration: ~90 seconds
 
-## Key Metrics (Summary)
+## Key Metrics (Summary)(aggregate report)
 | Label                 | Samples | Avg (ms) | Throughput (req/sec) | Error % |
 |-----------------------|---------|----------|----------------------|---------|
 | Homepage              | 100     | 590      | 9.54                 | 0%      |
