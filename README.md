@@ -1,54 +1,69 @@
-# BlazeDemo Performance Testing Project
+# BlazeDemo Performance Testing with JMeter & BlazeMeter
 
-## Project Overview
-A performance testing project for [BlazeDemo.com](https://www.blazedemo.com/) using Apache JMeter and BlazeMeter. The test simulates 100 users searching and purchasing flights with a ramp-up time of 10 seconds.
+## Overview
+This project showcases performance testing of the BlazeDemo website using **Apache JMeter** and **BlazeMeter**. The test simulates users searching for flights and proceeding with dummy purchases to measure performance under load.
 
-### Tools Used
-- **Apache JMeter**: For test scripting and execution
-- **BlazeMeter Extension**: For recording user flows
-- **Listeners**: Summary Report, Aggregate Report, View Results Tree
+## Tools & Technologies Used
+- **Apache JMeter** (Test creation and execution)
+- **BlazeMeter Chrome Extension** (Script recording)
+- **BlazeDemo** (Demo website for performance testing)
 
 ## Test Scenario
-1. **User Flow**:
-   - Access homepage
-   - Search for flights (`/reserve.php`)
-   - Select flight (`/purchase.php`)
-   - Confirm purchase (`/confirmation.php`)
+1. **Recording:** Used BlazeMeter Chrome Extension to record a test flow:
+   - Navigate to [BlazeDemo](https://www.blazedemo.com/)
+   - Search for a flight (Departure: Paris, Destination: Buenos Aires)
+   - Select a flight and proceed to checkout
+   - Fill in dummy passenger details and submit
 
-2. **Test Configuration**:
-   - Threads (Users): 100
-   - Ramp-Up Period: 10 seconds
-   - Loop Count: 1
-   - Duration: ~90 seconds
+2. **Execution:**
+   - Loaded the recorded **.jmx** file in JMeter
+   - Configured 100 users with a ramp-up time of 10 seconds
+   - Used multiple listeners to monitor and analyze performance:
+     - **Summary Report**
+     - **Aggregate Report**
+     - **View Results Tree**
+     - **View Results in Table**
 
-## Key Metrics (Summary)
-| Label                 | Samples | Avg (ms) | Throughput (req/sec) | Error % |
-|-----------------------|---------|----------|----------------------|---------|
-| Homepage              | 100     | 590      | 9.54                 | 0%      |
-| Flight Search         | 100     | 394      | 9.92                 | 0%      |
-| Flight Purchase       | 100     | 393      | 9.88                 | 0%      |
-| Confirmation Page     | 100     | 588      | 9.71                 | 0%      |
+## Project Files
+| File | Description |
+|------|-------------|
+| `BlazeDemo.jmx` | JMeter test script |
+| `aggregate.csv` | Aggregate report (Performance statistics) |
+| `summary.csv` | Summary report (Key metrics) |
 
-![Aggregate Report Screenshot](/screenshots/aggregate-report.png)
+## How to Run the Test
+1. **Install JMeter:** Download and install [Apache JMeter](https://jmeter.apache.org/download_jmeter.cgi).
+2. **Load the JMX file:**
+   - Open JMeter
+   - Click **File > Open** and select `BlazeDemo.jmx`
+3. **Run the test:** Click the **Start** button (Green Play icon) in JMeter.
+4. **View Results:** Open listeners (Summary Report, Aggregate Report) to analyze test performance.
 
-## How to Run
-1. **Prerequisites**:
-   - Install [JMeter](https://jmeter.apache.org/download_jmeter.cgi)
-   - Java 8+ installed
+## Key Performance Metrics
+- **Throughput:** The number of requests handled per second.
+- **Response Time:** Time taken for requests to complete.
+- **Error Rate:** Percentage of failed requests.
+- **Concurrent Users:** The number of simulated users interacting with the system.
+**Key Metrics (Aggregate Report)**
+| Label                 | Samples | Average (ms) | 90% Line (ms) | Throughput (req/sec) | Error % |
+|-----------------------|---------|--------------|---------------|----------------------|---------|
+| Homepage              | 100     | 590          | 613           | 9.54                 | 0%      |
+| Flight Search         | 100     | 394          | 429           | 9.92                 | 0%      |
+| Flight Purchase       | 100     | 393          | 419           | 9.88                 | 0%      |
+| Purchase Confirmation | 100     | 588          | 611           | 9.71                 | 0%      |
+| **TOTAL**             | 800     | 491          | 599           | 9.34                 | 0%      |
 
-2. **Steps**:
-   - Clone this repository.
-   - Open `BlazeDemo_TestPlan.jmx` in JMeter.
-   - Update thread count or ramp-up time if needed.
-   - Run the test plan.
-   - View results in the `results/` folder.
+## Findings & Observations
+- The server handled **100 concurrent users** efficiently with minimal response time degradation.
+- No significant errors were encountered during execution.
+- The test helped evaluate BlazeDemo's capability under simulated load conditions.
 
-## Files in Repository
-- `test-plans/BlazeDemo_TestPlan.jmx`: JMeter test plan
-- `results/aggregate.csv`: Aggregate report data
-- `results/summary.csv`: Summary report data
+## Future Enhancements
+- Increase the user load to assess scalability.
+- Implement distributed load testing using multiple JMeter instances.
+- Integrate with **BlazeMeter** cloud for advanced reporting.
 
-## Conclusion
-- All transactions completed with **0% errors**.
-- Average response time: **491 ms** across all requests.
-- System handled **9.34 req/sec** under 100 users.
+## Author
+**Muhammad Asad Nabeel Yousaf**
+
+Feel free to contribute, suggest improvements, or use this project as a reference for your performance testing needs!
